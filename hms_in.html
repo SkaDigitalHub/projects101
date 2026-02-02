@@ -1,0 +1,377 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Room Rental Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .login-card {
+            background: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981);
+        }
+        
+        .input-field {
+            transition: all 0.2s ease;
+            border: 1.5px solid #e2e8f0;
+        }
+        
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .password-toggle {
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .password-toggle:hover {
+            color: #3b82f6;
+        }
+        
+        .security-notice {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-left: 4px solid #0ea5e9;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full">
+        <!-- Company Branding -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg mb-5">
+                <i class="fas fa-building text-white text-2xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">HOME SWEET HOMES</h1>
+            <p class="text-gray-600 text-sm">Room Rental Management System</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="login-card p-8">
+            <div id="loginForm">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900">Welcome Back</h2>
+                    <p class="text-gray-500 text-sm mt-1">Sign in to your account to continue</p>
+                </div>
+                
+                <!-- Email Input -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-medium mb-2">
+                        Email Address
+                    </label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" 
+                               id="email" 
+                               placeholder="name@company.com"
+                               autocomplete="email"
+                               class="w-full pl-10 pr-4 py-3 rounded-lg input-field text-gray-900 placeholder-gray-400 focus:outline-none">
+                    </div>
+                </div>
+                
+                <!-- Password Input -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="block text-gray-700 text-sm font-medium">
+                            Password
+                        </label>
+                        <a href="#" class="text-sm text-blue-600 hover:text-blue-800 transition-colors font-medium">
+                            Forgot password?
+                        </a>
+                    </div>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" 
+                               id="password" 
+                               placeholder="Enter your password"
+                               autocomplete="current-password"
+                               class="w-full pl-10 pr-12 py-3 rounded-lg input-field text-gray-900 placeholder-gray-400 focus:outline-none">
+                        <i class="fas fa-eye password-toggle absolute" id="togglePassword"></i>
+                    </div>
+                </div>
+                
+                <!-- Remember Me -->
+                <div class="flex items-center mb-8">
+                    <div class="relative">
+                        <input type="checkbox" 
+                               id="rememberMe"
+                               class="sr-only peer">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded peer-checked:bg-blue-600 peer-checked:border-blue-600 flex items-center justify-center transition-colors">
+                            <i class="fas fa-check text-white text-xs opacity-0 peer-checked:opacity-100"></i>
+                        </div>
+                    </div>
+                    <label for="rememberMe" class="ml-3 text-gray-700 text-sm cursor-pointer select-none">
+                        Keep me signed in
+                    </label>
+                </div>
+                
+                <!-- Submit Button -->
+                <button id="loginBtn"
+                        class="w-full btn-primary py-3 px-4 rounded-lg font-medium flex items-center justify-center shadow-md">
+                    <span id="btnText">Sign In</span>
+                    <div id="loadingSpinner" class="hidden ml-3">
+                        <div class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                    </div>
+                </button>
+                
+                <!-- Security Notice -->
+                <div class="mt-8 p-4 rounded-lg security-notice">
+                    <div class="flex items-start">
+                        <i class="fas fa-shield-alt text-blue-500 mt-0.5 mr-3"></i>
+                        <div>
+                            <p class="text-sm text-gray-700 font-medium">Secure Login</p>
+                            <p class="text-xs text-gray-600 mt-1">Your credentials are encrypted and transmitted securely.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error Message -->
+                <div id="errorMessage" class="hidden mt-6 p-4 bg-red-50 border border-red-200 rounded-lg animate-fadeIn">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle text-red-500 mr-3"></i>
+                        <div>
+                            <p class="text-red-800 text-sm font-medium">Authentication Failed</p>
+                            <p id="errorText" class="text-red-600 text-sm mt-1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div id="successMessage" class="hidden">
+                <div class="text-center py-10">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-100 to-green-50 mb-6">
+                        <i class="fas fa-check text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Login Successful</h3>
+                    <p class="text-gray-600 mb-8">Redirecting to your dashboard...</p>
+                    <div class="w-full max-w-xs mx-auto">
+                        <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                            <div id="progressBar" class="h-full bg-gradient-to-r from-green-400 to-green-500 rounded-full transition-all duration-2000"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="text-center mt-10">
+            <p class="text-gray-500 text-sm">
+                © <span id="currentYear"></span> Home Sweet Homes Rental Management. All rights reserved.
+                <span class="block mt-1 text-xs text-gray-400">
+                    v2.1.0 • <a href="#" class="hover:text-gray-600 transition-colors">Terms</a> • <a href="#" class="hover:text-gray-600 transition-colors">Privacy</a>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+         const API_URL = 'https://script.google.com/macros/s/AKfycbzo2Js0mIl_2OgD99ugr5OZBlB39oqjQOkucZUDxg-TMpF0-tpV_qZu7SkdV1wOv6EyPw/exec'; 
+        
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnText = document.getElementById('btnText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const progressBar = document.getElementById('progressBar');
+        
+        // Check if user is already logged in
+        function checkExistingLogin() {
+            const userData = localStorage.getItem('userData');
+            const rememberMe = localStorage.getItem('rememberMe') === 'true';
+            
+            if (userData && rememberMe) {
+                try {
+                    const user = JSON.parse(userData);
+                    document.getElementById('email').value = user.email || '';
+                    document.getElementById('password').value = user.password || '';
+                    document.getElementById('rememberMe').checked = true;
+                } catch (e) {
+                    console.log('No saved credentials');
+                }
+            }
+        }
+        
+        // Handle login
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // Validation
+            if (!email || !password) {
+                showError('Please enter both email and password');
+                return;
+            }
+            
+            // Show loading state
+            btnText.textContent = 'Signing in...';
+            loadingSpinner.classList.remove('hidden');
+            loginBtn.disabled = true;
+            
+            try {
+                // Call login API
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'loginUser',
+                        data: { email, password }
+                    }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    // Save user data
+                    const userData = {
+                        email: result.user.email,
+                        name: result.user.name,
+                        role: result.user.role,
+                        timestamp: new Date().getTime()
+                    };
+                    
+                    // Store in localStorage
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    localStorage.setItem('rememberMe', rememberMe.toString());
+                    
+                    if (rememberMe) {
+                        localStorage.setItem('savedEmail', email);
+                        localStorage.setItem('savedPassword', password);
+                    } else {
+                        localStorage.removeItem('savedEmail');
+                        localStorage.removeItem('savedPassword');
+                    }
+                    
+                    // Show success and redirect
+                    showSuccess();
+                    redirectToDashboard();
+                    
+                } else {
+                    showError(result.message || 'Invalid email or password');
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('Network error. Please try again.');
+            } finally {
+                // Reset button
+                btnText.textContent = 'Sign In';
+                loadingSpinner.classList.add('hidden');
+                loginBtn.disabled = false;
+            }
+        }
+        
+        // Show error message
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.classList.remove('hidden');
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                errorMessage.classList.add('hidden');
+            }, 5000);
+        }
+        
+        // Show success message
+        function showSuccess() {
+            loginForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            
+            // Animate progress bar
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 1;
+                progressBar.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                }
+            }, 30);
+        }
+        
+        // Redirect to main application
+        function redirectToDashboard() {
+    setTimeout(() => {
+        // Get user data from localStorage
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            const user = JSON.parse(userData);
+            // Redirect with user data as URL parameter
+            window.location.href = `hms.html?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&role=${encodeURIComponent(user.role)}`;
+        } else {
+            window.location.href = 'hms.html';
+        }
+    }, 2000);
+}
+        
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        
+        // Add demo buttons dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            checkExistingLogin();
+             // Form submission
+            loginForm.addEventListener('submit', handleLogin);
+            loginBtn.addEventListener('click', handleLogin);
+            
+            // Enter key support
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin(e);
+                }
+            });
+        })
+            
+    </script>
+</body>
+</html>
