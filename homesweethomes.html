@@ -375,13 +375,7 @@ async validateWithBackend(email) {
 },
 
 
-redirectToLogin() {
-    // Clear any existing user data
-    localStorage.removeItem('userData');
-    
-    // Redirect to login page
-    window.location.href = 'hms_in.html';
-},
+
 
 async logout() {
     if (confirm('Are you sure you want to logout?')) {
