@@ -347,9 +347,9 @@
         if (userData) {
             const user = JSON.parse(userData);
             // Redirect with user data as URL parameter
-            window.location.href = `index.html?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&role=${encodeURIComponent(user.role)}`;
+            window.location.href = `homes.html?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&role=${encodeURIComponent(user.role)}`;
         } else {
-            window.location.href = 'index.html';
+            window.location.href = 'homes.html';
         }
     }, 2000);
 }
